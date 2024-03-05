@@ -33,9 +33,16 @@
         Console.WriteLine($"Enter the number of {ItemName} to restock: ");
         additionalQuantity = int.Parse(Console.ReadLine());
 
-        QuantityInStock += additionalQuantity;
-        Console.WriteLine($"{additionalQuantity} number of units have been added to {ItemName}. Number of units in stock is now {QuantityInStock}");
-        
+        if( additionalQuantity >= 0 )
+        {
+            QuantityInStock += additionalQuantity;
+            Console.WriteLine($"{additionalQuantity} number of units have been added to {ItemName}. Number of units in stock is now {QuantityInStock}");
+        }
+        else
+        {
+            Console.WriteLine("enter a valid number of additional quantiy to be added");
+        }
+
     }
 
     // Sell an item
@@ -52,9 +59,13 @@
             QuantityInStock -= quantitySold;
             Console.WriteLine($"Congratulations, you have successfully sold {quantitySold} units.");
         }
+        else if (quantitySold <= 0)
+        {
+            Console.WriteLine("enter a valid input of units to sell");
+        }
         else
         {
-            Console.WriteLine("You don't have sufficient units to sell"); //check to ensure stock quantity is not negative
+            Console.WriteLine("You don't have sufficient units to sell. Go and restock first"); //check to ensure stock quantity is not negative
         }
         
     }
@@ -62,15 +73,15 @@
     // Check if an item is in stock
     public bool IsInStock()
     {
-        return QuantityInStock > 0;
         // TODO: Return true if the item is in stock (quantity > 0), otherwise false.
+        return QuantityInStock > 0;
     }
 
     // Print item details
     public void PrintDetails()
     {
-        Console.WriteLine($"Name of Item: {ItemName}, item ID: {ItemId}, item Price: {Price}, Stock Quantity: {QuantityInStock}");
         // TODO: Print the details of the item (name, id, price, and stock quantity).
+        Console.WriteLine($"Name of Item: {ItemName}, item ID: {ItemId}, item Price: {Price}, Stock Quantity: {QuantityInStock}");
     }
 }
 class Program
@@ -81,8 +92,7 @@ class Program
         InventoryItem item1 = new InventoryItem("Laptop", 101, 1200.50, 10);
         InventoryItem item2 = new InventoryItem("Smartphone", 102, 800.30, 15);
 
-        // TODO: Implement logic to interact with these objects.
-        // Example tasks:
+
         // 1. Print details of all items.
         Console.WriteLine("Current inventory item details are:");
         item1.PrintDetails();
@@ -102,7 +112,7 @@ class Program
         Console.WriteLine();
 
         // 3. Restock an item and print the updated details.
-
+        Console.WriteLine("You want to restock on goods");
         item1.RestockItem(2);
         item2.RestockItem(2);
 
@@ -115,9 +125,8 @@ class Program
 
         // 4. Check if an item is in stock and print a message accordingly.
         Console.WriteLine("Checking if an item is in stock");
-        Console.WriteLine($"Item 1 is{(item1.IsInStock() ? "" : " not")} in stock.");
-        Console.WriteLine($"Item 2 is{(item2.IsInStock() ? "" : " not")} in stock.");
-
+        Console.WriteLine($"Item 1 ({item1.ItemName}) is{(item1.IsInStock() ? "" : " not")} in stock.");
+        Console.WriteLine($"Item 2 ({item2.ItemName}) is{(item2.IsInStock() ? "" : " not")} in stock.");
 
     }
 }
