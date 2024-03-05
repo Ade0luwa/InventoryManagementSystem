@@ -30,7 +30,7 @@
     {
         // TODO: Increase the item's stock quantity by the additional quantity.
 
-        Console.WriteLine($"Enter the number of {ItemName} to restock: ");
+        Console.WriteLine($"Enter the number of {ItemName}(s) to restock: ");
         additionalQuantity = int.Parse(Console.ReadLine());
 
         if( additionalQuantity >= 0 )
@@ -40,7 +40,7 @@
         }
         else
         {
-            Console.WriteLine("enter a valid number of additional quantiy to be added");
+            Console.WriteLine("enter a valid number of quantity to be added");
         }
 
     }
@@ -51,17 +51,17 @@
         // TODO: Decrease the item's stock quantity by the quantity sold.
         // Make sure the stock doesn't go negative.
 
-        Console.WriteLine($"Enter the number of {ItemName} you want to sell: ");
+        Console.WriteLine($"Enter the number of {ItemName}(s) you want to sell: ");
         quantitySold = int.Parse(Console.ReadLine());
 
-        if (quantitySold <= QuantityInStock)//if the amount of unit requested for is less than or equal to the units in stock, proceed with the sale
-        {
-            QuantityInStock -= quantitySold;
-            Console.WriteLine($"Congratulations, you have successfully sold {quantitySold} units.");
-        }
-        else if (quantitySold <= 0)
+        if (quantitySold <= 0)
         {
             Console.WriteLine("enter a valid input of units to sell");
+        }
+        else if (quantitySold <= QuantityInStock)//if the amount of unit requested for is less than or equal to the units in stock, proceed with the sale
+        {
+            QuantityInStock -= quantitySold;
+            Console.WriteLine($"Congratulations, you have successfully sold {quantitySold} units of {ItemName}(s).");
         }
         else
         {
@@ -100,7 +100,7 @@ class Program
         Console.WriteLine();
 
         // 2. Sell some items and then print the updated details.
-        Console.WriteLine("How the sales process works");
+        Console.WriteLine("You are about to sell an item");
         item1.SellItem(4);
         item2.SellItem(5);
 
@@ -112,7 +112,7 @@ class Program
         Console.WriteLine();
 
         // 3. Restock an item and print the updated details.
-        Console.WriteLine("You want to restock on goods");
+        Console.WriteLine("You are about to restock on goods");
         item1.RestockItem(2);
         item2.RestockItem(2);
 
